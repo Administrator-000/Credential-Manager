@@ -1,4 +1,4 @@
-Crdential Manager.ps1
+Credential Manager.ps1
 ---------------------
   Written in Windows PowerShell 5.1 / C# 5.0
 
