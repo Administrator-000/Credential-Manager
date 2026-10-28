@@ -18,14 +18,14 @@ Add-Type -AssemblyName System.Drawing
 #
 # About Control Panel (keymgr.dll):
 # - Control Panel Credential Manager (keymgr.dll) imports RPC functions from RPCRT4.dll
-# - It calls an UNDOCUMENTED RPC interface to VaultSvc (LocalSystem service on port 49664)
+# - It calls an UNDOCUMENTED RPC interface to VaultSvc (LocalSystem service on port 49664 - I have no idea where I came to this conclusion but it doesn't sound right.)
 # - The RPC interface definition, UUID, and function signatures are NOT published
 # - The RPC call likely passes vault credentials to VaultSvc which returns decrypted passwords
 # - Reproducing this would require:
-#   * RPC interface reverse-engineering (Wireshark / API Monitor)
+#   * RPC interface reverse-engineering (This likely uses LRPC or ALPC routing and unlikely to broadcast any meaningful diag info via ETW. Will require WinDbg or DLL process hooking)
 #   * Discovering the interface UUID and function signatures
 #   * Building an RPC client with proper marshaling
-#   * Risk of breaking with future Windows updates
+#   * Risk of breaking with future Windows updates (Can add-on version control)
 #
 # These credentials CAN be accessed via:
 #   a) Through CredRead/CredEnumerate (standard Windows Credential Manager)   [WORKS - standard creds only]
